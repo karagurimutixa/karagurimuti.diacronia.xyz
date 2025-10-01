@@ -26,6 +26,86 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Pattern */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(153, 3, 2, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(153, 3, 2, 0.05) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(153, 3, 2, 0.05);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 70%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 40%;
+            left: 90%;
+            animation-delay: -10s;
+        }
+
+        .floating-element:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 80%;
+            left: 10%;
+            animation-delay: -7s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            33% {
+                transform: translateY(-30px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(20px) rotate(240deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 1;
+            }
         }
 
         .container {
@@ -43,6 +123,12 @@
             padding: 20px 0;
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
         nav {
@@ -89,6 +175,15 @@
             width: 100%;
         }
 
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -96,10 +191,15 @@
             align-items: center;
             padding-top: 80px;
             background: linear-gradient(135deg, var(--secondary) 0%, #f8f4f3 100%);
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-content {
             max-width: 800px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
         }
 
         .hero h1 {
@@ -128,13 +228,31 @@
             font-weight: 500;
             border-radius: 4px;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transition: all 0.5s;
+            z-index: -1;
         }
 
         .btn:hover {
-            background-color: var(--primary);
             color: var(--secondary);
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(153, 3, 2, 0.2);
+        }
+
+        .btn:hover::before {
+            left: 0;
         }
 
         /* Skills Section */
@@ -173,6 +291,14 @@
             border-radius: 10px;
             transition: transform 0.3s;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .skill.animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s ease;
         }
 
         .skill:hover {
@@ -213,6 +339,98 @@
             color: var(--primary);
         }
 
+        /* Jobs Section */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .job-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .job-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary), #cc3332);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .job-img i {
+            font-size: 4rem;
+            color: white;
+            z-index: 1;
+        }
+
+        .job-content {
+            padding: 20px;
+        }
+
+        .job-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .job-content p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .job-period {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .job-tag {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
         /* Projects Section */
         .projects-grid {
             display: grid;
@@ -226,6 +444,14 @@
             overflow: hidden;
             transition: transform 0.3s;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .project-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s ease;
         }
 
         .project-card:hover {
@@ -308,11 +534,12 @@
         .social-links a {
             color: white;
             font-size: 1.5rem;
-            transition: color 0.3s;
+            transition: color 0.3s, transform 0.3s;
         }
 
         .social-links a:hover {
             color: var(--secondary);
+            transform: translateY(-5px);
         }
 
         .copyright {
@@ -320,23 +547,88 @@
             font-size: 0.9rem;
         }
 
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
             
             .nav-links {
-                display: none;
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background-color: rgba(235, 226, 224, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                gap: 30px;
+                transition: right 0.3s ease;
+                backdrop-filter: blur(10px);
             }
             
-            .skills-container, .projects-grid {
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .skills-container, .jobs-grid, .projects-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .skill, .job-card, .project-card {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Background Elements -->
+    <div class="bg-pattern"></div>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
     <!-- Header & Navigation -->
     <header>
         <div class="container">
@@ -345,9 +637,13 @@
                 <div class="nav-links">
                     <a href="#home">Home</a>
                     <a href="#skills">Skills</a>
+                    <a href="#jobs">Jobs</a>
                     <a href="#projects">Projects</a>
                     <a href="#contact">Contact</a>
                 </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
             </nav>
         </div>
     </header>
@@ -356,9 +652,10 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h1>Hi, I'm <span>Karagurimuti</span></h1>
+                <h1>Merhaba, Ben <span>Karagurimuti</span></h1>
+                <p>Web geliştirme, scripting ve yazılım mühendisliği konularında uzmanlaşmış tutkulu bir geliştiriciyim. Karmaşık problemler için verimli, ölçeklenebilir ve kullanıcı dostu çözümler oluşturmayı seviyorum.</p>
                 <p>I'm a passionate developer with expertise in web development, scripting, and software engineering. I love creating efficient, scalable, and user-friendly solutions for complex problems.</p>
-                <a href="#projects" class="btn">View My Work</a>
+                <a href="#projects" class="btn">Çalışmalarımı Görüntüle / View My Work</a>
             </div>
         </div>
     </section>
@@ -408,60 +705,187 @@
         </div>
     </section>
 
+    <!-- Jobs Section -->
+    <section id="jobs">
+        <div class="container">
+            <h2 class="section-title">Jobs & Experience</h2>
+            <div class="jobs-grid">
+                <div class="job-card">
+                    <div class="job-img">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="job-content">
+                        <h3>ro-inc.xyz</h3>
+                        <span class="job-period">2025 - 2025</span>
+                        <p>Translated ro-inc.xyz to Turkish.</p>
+                        <p>ro-inc.xyz'yi Türkçe'ye çevirdim.</p>
+                        <div class="job-tags">
+                            <span class="job-tag">Translation</span>
+                            <span class="job-tag">Linguistics</span>
+                            <span class="job-tag">Çeviri</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-card">
+                    <div class="job-img">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="job-content">
+                        <h3>ro-inc.xyz</h3>
+                        <span class="job-period">2024-2024 / 2025-2025</span>
+                        <p>Moderated Ro-inc Official Discord Server.</p>
+                        <p>Ro-inc Resmi Discord Sunucusu'nu yönettim.</p>
+                        <div class="job-tags">
+                            <span class="job-tag">Moderation</span>
+                            <span class="job-tag">Community Management</span>
+                            <span class="job-tag">Moderasyon</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-card">
+                    <div class="job-img">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="job-content">
+                        <h3>Diacronia</h3>
+                        <span class="job-period">2021 - Present</span>
+                        <p>Founder of Diacronia, an organization focused on Creating Codes.</p>
+                        <p>Kod oluşturmaya odaklanan bir organizasyon olan Diacronia'nın kurucusu.</p>
+                        <div class="job-tags">
+                            <span class="job-tag">Leadership</span>
+                            <span class="job-tag">Management</span>
+                            <span class="job-tag">Liderlik</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-card">
+                    <div class="job-img">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <div class="job-content">
+                        <h3>WGM</h3>
+                        <span class="job-period">2025 - Present</span>
+                        <p>Parliament Director of the Web Geliştirme Meclisi. managing the web developement parliament and the Parliament Head Directorship Department.</p>
+                        <p>Web Geliştirme Meclisinde Meclis Direktörü. Web Geliştirme Meclisini ve Meclis Yüksek Yönetmenliği Kurulunu Yönetiyorum.</p>
+                        <div class="job-tags">
+                            <span class="job-tag">Governance</span>
+                            <span class="job-tag">Leadership</span>
+                            <span class="job-tag">Yönetişim</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-card">
+                    <div class="job-img">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="job-content">
+                        <h3>TSC</h3>
+                        <span class="job-period">2025 - Present</span>
+                        <p>Server Manager at TSC, managing the discord bot and fixing the discord server bugs..</p>
+                        <p>TSC'de Sunucu Yöneticisi olarak sunucu discord botu ve discord buglarını düzeltiyorum.</p>
+                        <div class="job-tags">
+                            <span class="job-tag">Server Management</span>
+                            <span class="job-tag">Operations</span>
+                            <span class="job-tag">Sunucu Yönetimi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
-            <h2 class="section-title">Projects & Experience</h2>
+            <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-img">
-                        <i class="fas fa-language"></i>
+                        <i class="fas fa-robot"></i>
                     </div>
                     <div class="project-content">
-                        <h3>ro-inc.xyz</h3>
-                        <p>Translated ro-inc.xyz to turkish.</p>
+                        <h3>Dia Support Discord Bot</h3>
+                        <p>A Discord bot designed to provide support functionalities for Diacronia community.</p>
+                        <p>Diacronia topluluğu için destek işlevleri sağlamak üzere tasarlanmış bir Discord botu.</p>
                         <div class="project-tags">
-                            <span class="project-tag">Translation</span>
-                            <span class="project-tag">Linguistics</span>
+                            <span class="project-tag">Discord.js</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Bot Development</span>
                         </div>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-img">
-                        <i class="fas fa-gavel"></i>
+                        <i class="fas fa-shield-alt"></i>
                     </div>
                     <div class="project-content">
-                        <h3>ro-inc.xyz</h3>
-                        <p>Moderated Ro-inc Official Discord Server. </p>
+                        <h3>Dia Moderation Discord Bot</h3>
+                        <p>A moderation bot for Discord servers with advanced moderation features.</p>
+                        <p>Gelişmiş moderasyon özelliklerine sahip Discord sunucuları için bir moderasyon botu.</p>
                         <div class="project-tags">
+                            <span class="project-tag">Discord.js</span>
                             <span class="project-tag">Moderation</span>
-                            <span class="project-tag">Community Management</span>
+                            <span class="project-tag">Automation</span>
                         </div>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-img">
-                        <i class="fas fa-crown"></i>
+                        <i class="fas fa-tools"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Diacronia</h3>
-                        <p>Founder of Diacronia, an organization focused on Creating Codes.</p>
+                        <h3>TSC Bot</h3>
+                        <p>Custom bot developed for TSC community with specialized functionalities.</p>
+                        <p>TSC topluluğu için özel işlevlerle geliştirilmiş özel bot.</p>
                         <div class="project-tags">
-                            <span class="project-tag">Leadership</span>
-                            <span class="project-tag">Management</span>
+                            <span class="project-tag">Bot Development</span>
+                            <span class="project-tag">Custom Solutions</span>
+                            <span class="project-tag">JavaScript</span>
                         </div>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-img">
-                        <i class="fas fa-landmark"></i>
+                        <i class="fas fa-map"></i>
                     </div>
                     <div class="project-content">
-                        <h3>WGM</h3>
-                        <p>Parliament Director at WGM, overseeing governance and decision-making processes, and ensuring smooth operations.</p>
+                        <h3>TSC Roblox Map</h3>
+                        <p>Custom Roblox map developed for TSC community with unique features.</p>
+                        <p>TSC topluluğu için benzersiz özelliklerle geliştirilmiş özel Roblox haritası.</p>
                         <div class="project-tags">
-                            <span class="project-tag">Governance</span>
-                            <span class="project-tag">Leadership</span>
+                            <span class="project-tag">Roblox</span>
+                            <span class="project-tag">LUAU</span>
+                            <span class="project-tag">Game Development</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>diascript.diacronia.xyz</h3>
+                        <p>Official website for Diacronia's scripting resources and documentation.</p>
+                        <p>Diacronia'nın scripting kaynakları ve dokümantasyonu için resmi web sitesi.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Web Development</span>
+                            <span class="project-tag">Documentation</span>
+                            <span class="project-tag">HTML/CSS/JS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Diacronia Codes Frameworks</h3>
+                        <p>Collection of code frameworks and libraries developed by Diacronia.</p>
+                        <p>Diacronia tarafından geliştirilen kod çerçeveleri ve kütüphaneler koleksiyonu.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Frameworks</span>
+                            <span class="project-tag">Libraries</span>
+                            <span class="project-tag">Code Development</span>
                         </div>
                     </div>
                 </div>
@@ -490,10 +914,8 @@
             function isInViewport(element) {
                 const rect = element.getBoundingClientRect();
                 return (
-                    rect.top >= 0 &&
-                    rect.left >= 0 &&
-                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom >= 0
                 );
             }
             
@@ -507,11 +929,59 @@
                 });
             }
             
-            // Initial check
+            // Function to animate elements on scroll
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.skill, .job-card, .project-card');
+                
+                elements.forEach(element => {
+                    if (isInViewport(element)) {
+                        element.classList.add('animate');
+                    }
+                });
+            }
+            
+            // Header scroll effect
+            function headerScroll() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Initial animations
             animateSkillBars();
+            animateOnScroll();
+            headerScroll();
             
             // Check on scroll
-            window.addEventListener('scroll', animateSkillBars);
+            window.addEventListener('scroll', function() {
+                animateSkillBars();
+                animateOnScroll();
+                headerScroll();
+            });
         });
     </script>
 </body>
