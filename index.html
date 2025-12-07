@@ -27,6 +27,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            transition: all 0.5s ease;
         }
 
         /* Background Pattern */
@@ -56,7 +57,7 @@
             position: absolute;
             background: rgba(153, 3, 2, 0.05);
             border-radius: 50%;
-            animation: float 15s infinite linear;
+            animation: float 20s infinite linear;
         }
 
         .floating-element:nth-child(1) {
@@ -91,20 +92,39 @@
             animation-delay: -7s;
         }
 
+        .floating-element:nth-child(5) {
+            width: 70px;
+            height: 70px;
+            top: 20%;
+            left: 70%;
+            animation-delay: -3s;
+        }
+
+        .floating-element:nth-child(6) {
+            width: 90px;
+            height: 90px;
+            top: 60%;
+            left: 20%;
+            animation-delay: -12s;
+        }
+
         @keyframes float {
             0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.7;
             }
-            33% {
-                transform: translateY(-30px) rotate(120deg);
+            25% {
+                transform: translateY(-30px) rotate(90deg) scale(1.1);
             }
-            66% {
-                transform: translateY(20px) rotate(240deg);
+            50% {
+                transform: translateY(20px) rotate(180deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-20px) rotate(270deg) scale(1.05);
             }
             100% {
-                transform: translateY(0) rotate(360deg);
-                opacity: 1;
+                transform: translateY(0) rotate(360deg) scale(1);
+                opacity: 0.7;
             }
         }
 
@@ -141,18 +161,24 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .nav-links {
             display: flex;
             gap: 30px;
+            align-items: center;
         }
 
         .nav-links a {
             color: var(--text);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
         }
 
@@ -182,6 +208,37 @@
             font-size: 1.5rem;
             color: var(--primary);
             cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Language Toggle Button */
+        .language-toggle {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 20px;
+        }
+
+        .language-toggle:hover {
+            background-color: #7a0202;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(153, 3, 2, 0.2);
+        }
+
+        .language-toggle i {
+            font-size: 1rem;
         }
 
         /* Hero Section */
@@ -206,16 +263,34 @@
             font-size: 4rem;
             margin-bottom: 20px;
             color: var(--text);
+            animation: slideInLeft 1s ease-out;
         }
 
         .hero h1 span {
             color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: underlineExpand 1.5s ease-out 1s forwards;
         }
 
         .hero p {
             font-size: 1.2rem;
             color: var(--text-light);
             margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-out 0.5s both;
+            opacity: 0;
         }
 
         .btn {
@@ -231,6 +306,8 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            animation: fadeIn 1.5s ease-out 1s both;
+            opacity: 0;
         }
 
         .btn::before {
@@ -262,6 +339,7 @@
             text-align: center;
             position: relative;
             color: var(--primary);
+            animation: fadeInDown 1s ease-out;
         }
 
         .section-title::after {
@@ -273,10 +351,20 @@
             width: 80px;
             height: 3px;
             background-color: var(--primary);
+            animation: expandWidth 1s ease-out 0.5s forwards;
+            transform-origin: center;
         }
 
         section {
             padding: 100px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .skills-container {
@@ -289,7 +377,7 @@
             background-color: white;
             padding: 30px;
             border-radius: 10px;
-            transition: transform 0.3s;
+            transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             opacity: 0;
             transform: translateY(20px);
@@ -302,7 +390,7 @@
         }
 
         .skill:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
@@ -350,7 +438,7 @@
             background-color: white;
             border-radius: 10px;
             overflow: hidden;
-            transition: transform 0.3s;
+            transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             opacity: 0;
             transform: translateY(20px);
@@ -363,7 +451,7 @@
         }
 
         .job-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) rotate(1deg);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
@@ -391,6 +479,11 @@
             font-size: 4rem;
             color: white;
             z-index: 1;
+            transition: transform 0.5s;
+        }
+
+        .job-card:hover .job-img i {
+            transform: scale(1.2) rotate(5deg);
         }
 
         .job-content {
@@ -429,6 +522,12 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .job-card:hover .job-tag {
+            transform: translateY(-3px);
+            box-shadow: 0 3px 8px rgba(153, 3, 2, 0.1);
         }
 
         /* Projects Section */
@@ -442,7 +541,7 @@
             background-color: white;
             border-radius: 10px;
             overflow: hidden;
-            transition: transform 0.3s;
+            transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             opacity: 0;
             transform: translateY(20px);
@@ -455,7 +554,7 @@
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) rotate(-1deg);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
@@ -483,6 +582,11 @@
             font-size: 4rem;
             color: white;
             z-index: 1;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-img i {
+            transform: scale(1.2) rotate(-5deg);
         }
 
         .project-content {
@@ -514,6 +618,12 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover .project-tag {
+            transform: translateY(-3px);
+            box-shadow: 0 3px 8px rgba(153, 3, 2, 0.1);
         }
 
         /* Footer */
@@ -534,17 +644,27 @@
         .social-links a {
             color: white;
             font-size: 1.5rem;
-            transition: color 0.3s, transform 0.3s;
+            transition: all 0.3s;
+            display: inline-block;
         }
 
         .social-links a:hover {
             color: var(--secondary);
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.2);
         }
 
         .copyright {
             color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
+        }
+
+        /* Language-specific content */
+        .lang-tr {
+            display: none;
+        }
+
+        .lang-en {
+            display: block;
         }
 
         /* Animations */
@@ -556,6 +676,78 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes expandWidth {
+            from {
+                width: 0;
+            }
+            to {
+                width: 80px;
+            }
+        }
+
+        @keyframes underlineExpand {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
             }
         }
 
@@ -602,6 +794,11 @@
             .skills-container, .jobs-grid, .projects-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .language-toggle {
+                margin-left: 0;
+                margin-top: 10px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -627,6 +824,8 @@
         <div class="floating-element"></div>
         <div class="floating-element"></div>
         <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
     </div>
 
     <!-- Header & Navigation -->
@@ -640,6 +839,11 @@
                     <a href="#jobs">Jobs</a>
                     <a href="#projects">Projects</a>
                     <a href="#contact">Contact</a>
+                    <button class="language-toggle" id="languageToggle">
+                        <i class="fas fa-language"></i>
+                        <span class="lang-en">Türkçe</span>
+                        <span class="lang-tr">English</span>
+                    </button>
                 </div>
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -652,10 +856,14 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h1>Merhaba, Ben <span>Karagurimuti</span></h1>
-                <p>Web geliştirme, scripting ve yazılım mühendisliği konularında uzmanlaşmış tutkulu bir geliştiriciyim. Karmaşık problemler için verimli, ölçeklenebilir ve kullanıcı dostu çözümler oluşturmayı seviyorum.</p>
-                <p>I'm a passionate developer with expertise in web development, scripting, and software engineering. I love creating efficient, scalable, and user-friendly solutions for complex problems.</p>
-                <a href="#projects" class="btn">Çalışmalarımı Görüntüle / View My Work</a>
+                <h1 class="lang-en">Hello, I'm <span>Karagurimuti</span></h1>
+                <h1 class="lang-tr">Merhaba, Ben <span>Karagurimuti</span></h1>
+                <p class="lang-en">I'm a passionate developer with expertise in web development, scripting, and software engineering. I love creating efficient, scalable, and user-friendly solutions for complex problems.</p>
+                <p class="lang-tr">Web geliştirme, scripting ve yazılım mühendisliği konularında uzmanlaşmış tutkulu bir geliştiriciyim. Karmaşık problemler için verimli, ölçeklenebilir ve kullanıcı dostu çözümler oluşturmayı seviyorum.</p>
+                <a href="#projects" class="btn">
+                    <span class="lang-en">View My Work</span>
+                    <span class="lang-tr">Çalışmalarımı Görüntüle</span>
+                </a>
             </div>
         </div>
     </section>
@@ -663,7 +871,8 @@
     <!-- Skills Section -->
     <section id="skills">
         <div class="container">
-            <h2 class="section-title">Skills & Expertise</h2>
+            <h2 class="section-title lang-en">Skills & Expertise</h2>
+            <h2 class="section-title lang-tr">Yetenekler & Uzmanlık</h2>
             <div class="skills-container">
                 <div class="skill">
                     <h3>HTML <span>95%</span></h3>
@@ -708,7 +917,8 @@
     <!-- Jobs Section -->
     <section id="jobs">
         <div class="container">
-            <h2 class="section-title">Jobs & Experience</h2>
+            <h2 class="section-title lang-en">Jobs & Experience</h2>
+            <h2 class="section-title lang-tr">İşler & Deneyim</h2>
             <div class="jobs-grid">
                 <div class="job-card">
                     <div class="job-img">
@@ -717,8 +927,8 @@
                     <div class="job-content">
                         <h3>ro-inc.xyz</h3>
                         <span class="job-period">2025 - 2025</span>
-                        <p>Translated ro-inc.xyz to Turkish.</p>
-                        <p>ro-inc.xyz'yi Türkçe'ye çevirdim.</p>
+                        <p class="lang-en">Translated ro-inc.xyz to Turkish.</p>
+                        <p class="lang-tr">ro-inc.xyz'yi Türkçe'ye çevirdim.</p>
                         <div class="job-tags">
                             <span class="job-tag">Translation</span>
                             <span class="job-tag">Linguistics</span>
@@ -733,8 +943,8 @@
                     <div class="job-content">
                         <h3>ro-inc.xyz</h3>
                         <span class="job-period">2024-2024 / 2025-2025</span>
-                        <p>Moderated Ro-inc Official Discord Server.</p>
-                        <p>Ro-inc Resmi Discord Sunucusu'nu yönettim.</p>
+                        <p class="lang-en">Moderated Ro-inc Official Discord Server.</p>
+                        <p class="lang-tr">Ro-inc Resmi Discord Sunucusu'nu yönettim.</p>
                         <div class="job-tags">
                             <span class="job-tag">Moderation</span>
                             <span class="job-tag">Community Management</span>
@@ -749,8 +959,8 @@
                     <div class="job-content">
                         <h3>Diacronia</h3>
                         <span class="job-period">2021 - Present</span>
-                        <p>Founder of Diacronia, an organization focused on Creating Codes.</p>
-                        <p>Kod oluşturmaya odaklanan bir organizasyon olan Diacronia'nın kurucusu.</p>
+                        <p class="lang-en">Founder of Diacronia, an organization focused on Creating Codes.</p>
+                        <p class="lang-tr">Kod oluşturmaya odaklanan bir organizasyon olan Diacronia'nın kurucusu.</p>
                         <div class="job-tags">
                             <span class="job-tag">Leadership</span>
                             <span class="job-tag">Management</span>
@@ -765,8 +975,8 @@
                     <div class="job-content">
                         <h3>WGM</h3>
                         <span class="job-period">2025 - Present</span>
-                        <p>Parliament Director of the Web Geliştirme Meclisi. managing the web developement parliament and the Parliament Head Directorship Department.</p>
-                        <p>Web Geliştirme Meclisinde Meclis Direktörü. Web Geliştirme Meclisini ve Meclis Yüksek Yönetmenliği Kurulunu Yönetiyorum.</p>
+                        <p class="lang-en">Parliament Director of the Web Geliştirme Meclisi. Managing the web development parliament and the Parliament Head Directorship Department.</p>
+                        <p class="lang-tr">Web Geliştirme Meclisinde Meclis Direktörü. Web Geliştirme Meclisini ve Meclis Yüksek Yönetmenliği Kurulunu Yönetiyorum.</p>
                         <div class="job-tags">
                             <span class="job-tag">Governance</span>
                             <span class="job-tag">Leadership</span>
@@ -781,8 +991,8 @@
                     <div class="job-content">
                         <h3>TSC</h3>
                         <span class="job-period">2025 - Present</span>
-                        <p>Server Manager at TSC, managing the discord bot and fixing the discord server bugs..</p>
-                        <p>TSC'de Sunucu Yöneticisi olarak sunucu discord botu ve discord buglarını düzeltiyorum.</p>
+                        <p class="lang-en">Server Manager at TSC, managing the discord bot and fixing the discord server bugs.</p>
+                        <p class="lang-tr">TSC'de Sunucu Yöneticisi olarak sunucu discord botu ve discord buglarını düzeltiyorum.</p>
                         <div class="job-tags">
                             <span class="job-tag">Server Management</span>
                             <span class="job-tag">Operations</span>
@@ -797,7 +1007,8 @@
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
-            <h2 class="section-title">Projects</h2>
+            <h2 class="section-title lang-en">Projects</h2>
+            <h2 class="section-title lang-tr">Projeler</h2>
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-img">
@@ -805,8 +1016,8 @@
                     </div>
                     <div class="project-content">
                         <h3>Dia Support Discord Bot</h3>
-                        <p>A Discord bot designed to provide support functionalities for Diacronia community.</p>
-                        <p>Diacronia topluluğu için destek işlevleri sağlamak üzere tasarlanmış bir Discord botu.</p>
+                        <p class="lang-en">A Discord bot designed to provide support functionalities for Diacronia community.</p>
+                        <p class="lang-tr">Diacronia topluluğu için destek işlevleri sağlamak üzere tasarlanmış bir Discord botu.</p>
                         <div class="project-tags">
                             <span class="project-tag">Discord.js</span>
                             <span class="project-tag">JavaScript</span>
@@ -820,8 +1031,8 @@
                     </div>
                     <div class="project-content">
                         <h3>Dia Moderation Discord Bot</h3>
-                        <p>A moderation bot for Discord servers with advanced moderation features.</p>
-                        <p>Gelişmiş moderasyon özelliklerine sahip Discord sunucuları için bir moderasyon botu.</p>
+                        <p class="lang-en">A moderation bot for Discord servers with advanced moderation features.</p>
+                        <p class="lang-tr">Gelişmiş moderasyon özelliklerine sahip Discord sunucuları için bir moderasyon botu.</p>
                         <div class="project-tags">
                             <span class="project-tag">Discord.js</span>
                             <span class="project-tag">Moderation</span>
@@ -835,8 +1046,8 @@
                     </div>
                     <div class="project-content">
                         <h3>TSC Bot</h3>
-                        <p>Custom bot developed for TSC community with specialized functionalities.</p>
-                        <p>TSC topluluğu için özel işlevlerle geliştirilmiş özel bot.</p>
+                        <p class="lang-en">Custom bot developed for TSC community with specialized functionalities.</p>
+                        <p class="lang-tr">TSC topluluğu için özel işlevlerle geliştirilmiş özel bot.</p>
                         <div class="project-tags">
                             <span class="project-tag">Bot Development</span>
                             <span class="project-tag">Custom Solutions</span>
@@ -850,8 +1061,8 @@
                     </div>
                     <div class="project-content">
                         <h3>TSC Roblox Map</h3>
-                        <p>Custom Roblox map developed for TSC community with unique features.</p>
-                        <p>TSC topluluğu için benzersiz özelliklerle geliştirilmiş özel Roblox haritası.</p>
+                        <p class="lang-en">Custom Roblox map developed for TSC community with unique features.</p>
+                        <p class="lang-tr">TSC topluluğu için benzersiz özelliklerle geliştirilmiş özel Roblox haritası.</p>
                         <div class="project-tags">
                             <span class="project-tag">Roblox</span>
                             <span class="project-tag">LUAU</span>
@@ -865,8 +1076,8 @@
                     </div>
                     <div class="project-content">
                         <h3>diascript.diacronia.xyz</h3>
-                        <p>Official website for Diacronia's scripting resources and documentation.</p>
-                        <p>Diacronia'nın scripting kaynakları ve dokümantasyonu için resmi web sitesi.</p>
+                        <p class="lang-en">Official website for Diacronia's scripting resources and documentation.</p>
+                        <p class="lang-tr">Diacronia'nın scripting kaynakları ve dokümantasyonu için resmi web sitesi.</p>
                         <div class="project-tags">
                             <span class="project-tag">Web Development</span>
                             <span class="project-tag">Documentation</span>
@@ -880,8 +1091,8 @@
                     </div>
                     <div class="project-content">
                         <h3>Diacronia Codes Frameworks</h3>
-                        <p>Collection of code frameworks and libraries developed by Diacronia.</p>
-                        <p>Diacronia tarafından geliştirilen kod çerçeveleri ve kütüphaneler koleksiyonu.</p>
+                        <p class="lang-en">Collection of code frameworks and libraries developed by Diacronia.</p>
+                        <p class="lang-tr">Diacronia tarafından geliştirilen kod çerçeveleri ve kütüphaneler koleksiyonu.</p>
                         <div class="project-tags">
                             <span class="project-tag">Frameworks</span>
                             <span class="project-tag">Libraries</span>
@@ -905,8 +1116,55 @@
     </footer>
 
     <script>
-        // Animate skill bars when they come into view
+        // Language toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
+            const languageToggle = document.getElementById('languageToggle');
+            let currentLanguage = 'en'; // Default language
+            
+            // Function to toggle language
+            function toggleLanguage() {
+                if (currentLanguage === 'en') {
+                    // Switch to Turkish
+                    currentLanguage = 'tr';
+                    document.querySelectorAll('.lang-en').forEach(el => {
+                        el.style.display = 'none';
+                    });
+                    document.querySelectorAll('.lang-tr').forEach(el => {
+                        el.style.display = 'block';
+                    });
+                    // Update button text
+                    languageToggle.querySelector('.lang-en').style.display = 'block';
+                    languageToggle.querySelector('.lang-tr').style.display = 'none';
+                } else {
+                    // Switch to English
+                    currentLanguage = 'en';
+                    document.querySelectorAll('.lang-en').forEach(el => {
+                        el.style.display = 'block';
+                    });
+                    document.querySelectorAll('.lang-tr').forEach(el => {
+                        el.style.display = 'none';
+                    });
+                    // Update button text
+                    languageToggle.querySelector('.lang-en').style.display = 'none';
+                    languageToggle.querySelector('.lang-tr').style.display = 'block';
+                }
+                
+                // Add animation effect to content
+                document.body.style.animation = 'none';
+                setTimeout(() => {
+                    document.body.style.animation = 'fadeIn 0.5s ease-out';
+                }, 10);
+            }
+            
+            // Add event listener to language toggle button
+            languageToggle.addEventListener('click', toggleLanguage);
+            
+            // Initialize language display
+            document.querySelectorAll('.lang-tr').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Animate skill bars when they come into view
             const skillSection = document.getElementById('skills');
             const skillBars = document.querySelectorAll('.skill-progress');
             
@@ -914,7 +1172,7 @@
             function isInViewport(element) {
                 const rect = element.getBoundingClientRect();
                 return (
-                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9 &&
                     rect.bottom >= 0
                 );
             }
@@ -931,7 +1189,14 @@
             
             // Function to animate elements on scroll
             function animateOnScroll() {
+                const sections = document.querySelectorAll('section');
                 const elements = document.querySelectorAll('.skill, .job-card, .project-card');
+                
+                sections.forEach(section => {
+                    if (isInViewport(section)) {
+                        section.classList.add('visible');
+                    }
+                });
                 
                 elements.forEach(element => {
                     if (isInViewport(element)) {
@@ -971,16 +1236,43 @@
                 });
             });
             
+            // Add hover effect to cards with delay for animation
+            const cards = document.querySelectorAll('.job-card, .project-card');
+            cards.forEach((card, index) => {
+                card.style.transitionDelay = `${index * 0.05}s`;
+            });
+            
             // Initial animations
             animateSkillBars();
             animateOnScroll();
             headerScroll();
+            
+            // Make hero section visible immediately
+            document.querySelector('.hero').classList.add('visible');
             
             // Check on scroll
             window.addEventListener('scroll', function() {
                 animateSkillBars();
                 animateOnScroll();
                 headerScroll();
+            });
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
         });
     </script>
